@@ -7,7 +7,7 @@ import CustomerForm from "../components/CustomerForm"
 import PaymentForm from "../components/PaymentForm"
 import { toast } from "react-hot-toast"
 import { db } from "../config/firebase"
-import { addDoc, collection, getDocs } from "firebase/firestore"
+import { addDoc, collection, doc, getDocs } from "firebase/firestore"
 import { useNavigate, useParams } from "react-router-dom"
 import PaymentSuccess from "../components/PaymentSuccess"
 
@@ -56,13 +56,14 @@ export default function Checkout() {
         (prev: any, { quantity }: any) => prev + quantity,
         0
       ),
-      user: `/users/${restaurantId}`
+      user: doc(db, `/users/${restaurantId}`),
+      created_at: new Date()
     })
 
     for (const item of cart?.items as CartItemType[]) {
       await addDoc(collection(orderRef, "items"), {
         quantity: item.quantity,
-        ref: `/menu-items/${item.item.id}`
+        ref: doc(db, `/menu-items/${item.item.id}`)
       })
     }
 

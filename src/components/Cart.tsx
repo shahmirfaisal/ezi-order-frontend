@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography"
 import CloseIcon from "@mui/icons-material/Close"
 import Slide from "@mui/material/Slide"
 import { TransitionProps } from "@mui/material/transitions"
-import { Box, Container, Grid, Paper } from "@mui/material"
+import { Container, Grid, Paper } from "@mui/material"
 import MenuItem from "./MenuItem"
 import { useNavigate } from "react-router-dom"
 

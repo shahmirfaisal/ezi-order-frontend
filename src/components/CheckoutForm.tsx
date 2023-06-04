@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -19,7 +19,6 @@ const CheckoutForm = ({ handleNext, handleBack, placeOrder }: Props) => {
   const stripe = useStripe()
   const elements = useElements()
 
-  const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: any) => {
@@ -31,7 +30,7 @@ const CheckoutForm = ({ handleNext, handleBack, placeOrder }: Props) => {
 
     setIsLoading(true)
 
-    const { error, paymentIntent } = await stripe.confirmPayment({
+    const { error } = await stripe.confirmPayment({
       elements,
       redirect: "if_required"
     })
@@ -58,10 +57,7 @@ const CheckoutForm = ({ handleNext, handleBack, placeOrder }: Props) => {
   return (
     <div>
       <form id="payment-form" onSubmit={handleSubmit}>
-        <LinkAuthenticationElement
-          id="link-authentication-element"
-          onChange={(e: any) => setEmail(e.target.value)}
-        />
+        <LinkAuthenticationElement id="link-authentication-element" />
         <PaymentElement
           id="payment-element"
           options={paymentElementOptions as StripePaymentElementOptions}

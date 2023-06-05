@@ -22,7 +22,9 @@ export default function Checkout() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const cart: CartType = JSON.parse(localStorage.getItem("cart") || "{}")
+    const cart: CartType = JSON.parse(
+      localStorage.getItem(`cart-${restaurantId}`) || "{}"
+    )
 
     if (cart && cart.items?.length) {
       setCart(cart)

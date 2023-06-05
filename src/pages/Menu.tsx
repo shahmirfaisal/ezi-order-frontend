@@ -37,14 +37,14 @@ const Menu = () => {
 
   //  store cart in local storage
   useEffect(() => {
-    const cart = localStorage.getItem("cart")
+    const cart = localStorage.getItem(`cart-${restaurantId}`)
     if (cart) {
       setCart(JSON.parse(cart))
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
+    localStorage.setItem(`cart-${restaurantId}`, JSON.stringify(cart))
   }, [cart])
 
   const getMenuItems = async () => {
